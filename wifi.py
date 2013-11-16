@@ -29,11 +29,11 @@ while True:
     if not check_connection():
         print "Connecting"
         reconnect()
-        conn = check_connection()
+        connected = check_connection()
         if r.response.code == 403:
             print "You haven\'t connected to WiFi yet"
-        elif conn:
+        elif connected:
             print "Connected"
-        elif not conn or r.response.error:
+        elif not connected or r.response.error:
             print 'Unknown error'
     time.sleep(TIMEOUT)

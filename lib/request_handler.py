@@ -62,8 +62,9 @@ class RequestHandler:
         try:
             self.response = Response(body=self.opener.open(request))
         except urllib2.URLError, e:
+            self.response = Response(url=url)
             if hasattr(e, 'reason'):
-                self.response = Response(error=e.reason, url=url)
-            elif hasattr(e, 'code'):
-                self.response = Response(code=e.code, url=url)
+                self.response.error = e.reason
+            if hasattr(e, 'code'):
+                self.response.code = e.code
         return self.response
